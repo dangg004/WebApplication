@@ -4,10 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.Data;
+using WebApplication1.Mappers;
 
 namespace WebApplication1.Controllers
 {
-    [Route("WebApplication1/stock")]
+    [Route("WebApplication/stock")]
     [ApiController]
     public class StockController : ControllerBase
     {
@@ -19,7 +20,7 @@ namespace WebApplication1.Controllers
 
         [HttpGet]
         public IActionResult GetAll() {
-            var stocks = _context.Stock.ToList();
+            var stocks = _context.Stock.ToList().Select(s => s.ToStockDTO());
             return Ok(stocks);
         }
 
@@ -29,7 +30,7 @@ namespace WebApplication1.Controllers
             if (stock == null) {
                 return NotFound();
             }
-            return Ok(stock);
+            return Ok(stock.ToStockDTO());
         }       
     }
 }
