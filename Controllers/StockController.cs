@@ -41,5 +41,25 @@ namespace WebApplication1.Controllers
             _context.SaveChanges();
             return CreatedAtAction(nameof(GetByID), new { ID = stockModel.ID }, stockModel.ToStockDTO());
         }      
+
+        [HttpPut("{ID}")]
+        public IActionResult Update([FromRoute] int ID, [FromBody] UpdateStockRequestDTO updateDTO) {
+            var stockModel = _context.Stock.Find(ID);
+
+            if (stockModel == null) {
+                return NotFound();
+            }
+
+            stockModel.Symbol = updateDTO.Symbol;
+            stockModel.CompanyName = updateDTO.CompanyName;
+            stockModel.Industry = updateDTO.Industry;
+            stockModel.LastDiv = updateDTO.LastDiv;
+            stockModel.Purchase = updateDTO.Purchase;
+            stockModel.MarketCap = updateDTO.MarketCap;
+
+            _context.SaveChanges();
+
+            return Ok(stockModel.ToStockDTO());
+        }
     }
 }
