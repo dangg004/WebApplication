@@ -32,7 +32,7 @@ namespace WebApplication1.Controllers
 
         [HttpGet("{ID}")]
         public async Task<IActionResult> GetByID([FromRoute] int ID) {
-            var stock = await _context.Stock.FindAsync(ID);
+            var stock = await _stockRepo.GetByIDAsync(ID);
             if (stock == null) {
                 return NotFound();
             }
@@ -42,42 +42,28 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateStockRequestDTO stockDTO) {
             var stockModel = stockDTO.ToStockFromCreateDTO();
-            await _context.Stock.AddAsync(stockModel);
-            await _context.SaveChangesAsync();
+            await _stockRepo.CreateAsync(stockModel);
             return CreatedAtAction(nameof(GetByID), new { ID = stockModel.ID }, stockModel.ToStockDTO());
         }      
 
         [HttpPut("{ID}")]
         public async Task<IActionResult> Update([FromRoute] int ID, [FromBody] UpdateStockRequestDTO updateDTO) {
-            var stockModel = await _context.Stock.FindAsync(ID);
+            var stockModel = await _stockRepo.UpdateAsync(ID, updateDTO);
 
             if (stockModel == null) {
                 return NotFound();
             }
-
-            stockModel.Symbol = updateDTO.Symbol;
-            stockModel.CompanyName = updateDTO.CompanyName;
-            stockModel.Industry = updateDTO.Industry;
-            stockModel.LastDiv = updateDTO.LastDiv;
-            stockModel.Purchase = updateDTO.Purchase;
-            stockModel.MarketCap = updateDTO.MarketCap;
-
-            await _context.SaveChangesAsync();
 
             return Ok(stockModel.ToStockDTO());
         }
 
         [HttpDelete("{ID}")]
         public async Task<IActionResult> Delete([FromRoute] int ID) {
-            var stockModel = await _context.Stock.FindAsync(ID);
+            var stockModel = await _stockRepo.DeleteAsync(ID);
 
             if (stockModel == null) {
                 return NotFound();
             }
-
-            _context.Stock.Remove(stockModel);
-
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }    
