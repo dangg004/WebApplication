@@ -13,5 +13,6 @@ namespace WebApplication1.Interfaces
         Task<Comment?> GetByIDAsync(int ID);
         Task<Comment> CreateAsync(Comment commentModel);
         Task<Comment?> UpdateAsync(int ID, UpdateCommentRequestDTO commentDTO);
+        Task<Comment?> DeleteAsync(int ID);
     }
 }
