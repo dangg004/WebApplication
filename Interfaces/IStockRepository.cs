@@ -14,5 +14,6 @@ namespace WebApplication1.Interfaces
         Task<Stock> CreateAsync(Stock stockModel);
         Task<Stock?> UpdateAsync(int ID, UpdateStockRequestDTO stockDTO);
         Task<Stock?> DeleteAsync(int ID);
+        Task<bool> StockExists(int ID);
     }
 }
