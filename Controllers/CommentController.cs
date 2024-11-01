@@ -48,7 +48,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPut("{ID}")]
-        public async Task<IActionResult> Update([FromRoute] int ID, UpdateCommentRequestDTO updateDTO) {
+        public async Task<IActionResult> Update([FromRoute] int ID, [FromBody] UpdateCommentRequestDTO updateDTO) {
             var comment = await _commentRepo.UpdateAsync(ID, updateDTO);
             if (comment == null) {
                 return NotFound("Comment not found");
