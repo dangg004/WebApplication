@@ -55,5 +55,14 @@ namespace WebApplication1.Controllers
             }
             return Ok(comment.ToCommentDTO());
         }
+
+        [HttpDelete("{ID}")]
+        public async Task<IActionResult> Delete([FromRoute] int ID) {
+            var comment = await _commentRepo.DeleteAsync(ID);
+            if (comment == null) {
+                return NotFound("Comment not found");
+            }
+            return NoContent();
+        }
     }
 }
