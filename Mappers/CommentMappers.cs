@@ -18,5 +18,13 @@ namespace WebApplication1.Mappers
                 StockID = commentModel.StockID
             };
         }
+
+        public static Comment ToCommentFromCreate(this CreateCommentDTO commentDTO, int stockID) {
+            return new Comment {
+                Title = commentDTO.Title,
+                Content = commentDTO.Content,
+                StockID = stockID,
+            };
+        }
     }
 }
