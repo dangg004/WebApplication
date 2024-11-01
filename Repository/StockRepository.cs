@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using WebApplication1.Data;
 using WebApplication1.DTOs.Stock;
+using WebApplication1.Helpers;
 using WebApplication1.Interfaces;
 using WebApplication1.Models;
 
@@ -39,9 +40,16 @@ namespace WebApplication1.Repository
             return stockModel;
         }
 
-        public async Task<List<Stock>> GetAllAsync()
+        public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            return await _context.Stock.Include(c => c.Comments).ToListAsync();
+            var stock = _context.Stock.Include(c => c.Comments).AsQueryable();
+            if (!string.IsNullOrWhiteSpace(query.CompanyName)) {
+                stock = stock.Where(c => c.CompanyName.Contains(query.CompanyName));
+            }
+            if (!string.IsNullOrWhiteSpace(query.Symbol)) {
+                stock = stock.Where(c => c.Symbol.Contains(query.Symbol));
+            }
+            return await stock.ToListAsync();
         }
 
         public async Task<Stock?> GetByIDAsync(int ID)
