@@ -49,6 +49,11 @@ namespace WebApplication1.Repository
             if (!string.IsNullOrWhiteSpace(query.Symbol)) {
                 stock = stock.Where(c => c.Symbol.Contains(query.Symbol));
             }
+            if (!string.IsNullOrWhiteSpace(query.SortBy)) {
+                if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase)) {
+                    stock = query.IsDescending ? stock.OrderByDescending(s => s.Symbol) : stock.OrderBy(s => s.Symbol); 
+                }
+            }
             return await stock.ToListAsync();
         }
 
