@@ -12,6 +12,7 @@ namespace WebApplication1.Interfaces
     {
         Task<List<Stock>> GetAllAsync(QueryObject query);
         Task<Stock?> GetByIDAsync(int ID);
+        Task<Stock?> GetBySymbolAsync(string symbol);
         Task<Stock> CreateAsync(Stock stockModel);
         Task<Stock?> UpdateAsync(int ID, UpdateStockRequestDTO stockDTO);
         Task<Stock?> DeleteAsync(int ID);
