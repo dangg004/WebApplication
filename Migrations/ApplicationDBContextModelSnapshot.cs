@@ -51,13 +51,13 @@ namespace WebApplication1.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2f19ec4e-de86-4f31-bae5-79468d567be8",
+                            Id = "62ed7f50-d433-4ee2-83a0-882a75c1ad8a",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "17d0071e-621f-430f-a8f1-048b3f67e346",
+                            Id = "0a2fb12f-0d23-4095-8331-2e3492f51e25",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -242,6 +242,10 @@ namespace WebApplication1.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
+                    b.Property<string>("AppUserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Content")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -257,6 +261,8 @@ namespace WebApplication1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("AppUserID");
 
                     b.HasIndex("StockID");
 
@@ -365,9 +371,17 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.Comment", b =>
                 {
+                    b.HasOne("WebApplication1.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("WebApplication1.Models.Stock", "Stock")
                         .WithMany("Comments")
                         .HasForeignKey("StockID");
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Stock");
                 });
