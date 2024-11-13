@@ -42,7 +42,7 @@ namespace WebApplication1.Repository
 
         public async Task<List<Stock>> GetAllAsync(QueryObject query)
         {
-            var stock = _context.Stock.Include(c => c.Comments).AsQueryable();
+            var stock = _context.Stock.Include(c => c.Comments).ThenInclude(a => a.AppUser).AsQueryable();
             if (!string.IsNullOrWhiteSpace(query.CompanyName)) {
                 stock = stock.Where(c => c.CompanyName.Contains(query.CompanyName));
             }
