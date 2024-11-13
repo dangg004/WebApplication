@@ -30,7 +30,7 @@ namespace WebApplication1.Controllers
                 return BadRequest(ModelState);
             }
             var stocks = await _stockRepo.GetAllAsync(query);
-            var stockDTO = stocks.Select(s => s.ToStockDTO());
+            var stockDTO = stocks.Select(s => s.ToStockDTO()).ToList();
             return Ok(stockDTO);
         }
 
