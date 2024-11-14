@@ -52,7 +52,7 @@ namespace WebApplication1.Controllers
         }
 
         [HttpPost("{symbol:alpha}")]
-        public async Task<IActionResult> Create([FromRoute] string symbol, CreateCommentDTO commentDTO) {
+        public async Task<IActionResult> Create([FromRoute] string symbol, [FromBody] CreateCommentDTO commentDTO) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
