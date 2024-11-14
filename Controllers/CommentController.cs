@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApplication1.DTOs.Comment;
 using WebApplication1.Extensions;
+using WebApplication1.Helpers;
 using WebApplication1.Interfaces;
 using WebApplication1.Mappers;
 using WebApplication1.Models;
@@ -30,11 +32,12 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll() {
+        [Authorize]
+        public async Task<IActionResult> GetAll([FromQuery] CommentQueryObject queryObject) {
             if (!ModelState.IsValid) {
                 return BadRequest(ModelState);
             }
-            var comments = await _commentRepo.GetAllAsync();
+            var comments = await _commentRepo.GetAllAsync(queryObject);
             var commentDTO = comments.Select(x => x.ToCommentDTO());
             return Ok(commentDTO);
         }
