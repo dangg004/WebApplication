@@ -57,7 +57,7 @@ namespace WebApplication1.Repository
 
         public async Task<Comment?> UpdateAsync(int ID, UpdateCommentRequestDTO commentDTO)
         {
-            var existingComment = await _context.Comments.FindAsync(ID);
+            var existingComment = await _context.Comments.Include(a => a.AppUser).FirstOrDefaultAsync(i => i.ID == ID);
             if (existingComment == null) {
                 return null;
             }
