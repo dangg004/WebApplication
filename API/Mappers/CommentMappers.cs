@@ -9,7 +9,7 @@ namespace WebApplication1.Mappers
 {
     public static class CommentMappers
     {
-        public static CommentDTO ToCommentDTO(this Comment commentModel) {
+        public static CommentDTO ToCommentDTO(this Comment commentModel) {//+
             return new CommentDTO {
                 ID = commentModel.ID,
                 Title = commentModel.Title,
@@ -27,5 +27,6 @@ namespace WebApplication1.Mappers
                 StockID = stockID,
             };
         }
+
     }
-}
+}    
