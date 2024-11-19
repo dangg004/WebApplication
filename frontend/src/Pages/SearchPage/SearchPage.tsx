@@ -1,9 +1,9 @@
 import React, { ChangeEvent, SyntheticEvent, useState } from "react";
-import { CompanySearch } from "../../../company";
-import { searchCompanies } from "../../../api";
-import Search from "../../Search/Search";
-import ListPortfolio from "../../Portfolio/ListPortfolio/ListPortfolio";
-import CardList from "../../CardList/CardList";
+import { CompanySearch } from "../../company";
+import { searchCompanies } from "../../api";
+import Search from "../../Components/Search/Search";
+import ListPortfolio from "../../Components/Portfolio/ListPortfolio/ListPortfolio";
+import CardList from "../../Components/CardList/CardList";
 
 interface Props {}
 

@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { searchCompanies } from "./api";
 import { RouterProvider } from "react-router-dom";
-import { router } from "./Components/Routes/Routes";
+import { router } from "./Routes/Routes";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
