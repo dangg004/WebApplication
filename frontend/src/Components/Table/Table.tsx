@@ -8,7 +8,7 @@ type Company = (typeof data)[0];
 const configs = [
   {
     Label: "Year",
-    render: (company: Company) => company.acceptedDate,
+    render: (company: Company) => company.calendarYear,
   },
   {
     Label: "Cost of revenue",
@@ -42,10 +42,8 @@ const Table = (props: Props) => {
   });
   return (
     <div className="bg-white shadow rounded-lg p-4 sm:p-6 xl:p-8">
-      <table>
-        <thead className="min-w-full divide-y divide-gray-200 m-5">
-          {renderedHeader}
-        </thead>
+      <table className="min-w-full divide-y divide-gray-200 m-5">
+        <thead className="bg-gray-50">{renderedHeader}</thead>
         <tbody>{renderedRow}</tbody>
       </table>
     </div>
