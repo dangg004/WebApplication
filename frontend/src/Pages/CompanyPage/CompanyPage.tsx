@@ -5,6 +5,7 @@ import { getCompanyProfile } from "../../api";
 import Sidebar from "../../Components/Sidebar/Sidebar";
 import CompanyDashboard from "../../Components/CompanyDashboard/CompanyDashboard";
 import Tile from "../../Components/Tile/Tile";
+import Spinner from "../../Components/Spinner/Spinner";
 
 interface Props {}
 
@@ -27,10 +28,13 @@ const CompanyPage = (props: Props) => {
           <Sidebar />
           <CompanyDashboard ticker={ticker!}>
             <Tile title="Company Name" subTitle={company.companyName}></Tile>
+            <Tile title="Price" subTitle={company.price.toString()}></Tile>
+            <Tile title="Sector" subTitle={company.sector}></Tile>
+            <Tile title="DCF" subTitle={company.dcf.toString()}></Tile>
           </CompanyDashboard>
         </div>
       ) : (
-        <div>Company not found!</div>
+        <Spinner />
       )}
     </>
   );
