@@ -314,7 +314,7 @@ export interface CompanyCompData {
   peersList: string[];
 }
 
-export interface Company10K {
+export interface CompanyTenK {
   symbol: string;
   fillingDate: string;
   acceptedDate: string;
