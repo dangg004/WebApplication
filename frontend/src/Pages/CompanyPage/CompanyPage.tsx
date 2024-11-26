@@ -36,7 +36,6 @@ const CompanyPage = (props: Props) => {
             ></Tile>
             <Tile title="DCF" subTitle={"$" + company.dcf.toString()}></Tile>
             <Tile title="Sector" subTitle={company.sector}></Tile>
-            <CompFinder ticker={company.symbol} />
             <TenKFinder ticker={company.symbol} />
             <p className="bg-white shadow rounded text-medium font-medium text-gray-900 p-3 mt-1 m-4">
               {company.description}
